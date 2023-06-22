@@ -1,0 +1,188 @@
+// Ejercicio 1 - TP 2
+
+class Auto {
+    marca: string;
+    modelo: string;
+    potencia: number;
+    maxVelocidad: number;
+  
+    constructor(marca: string, modelo: string, potencia: number, maxVelocidad: number) {
+      this.marca = marca;
+      this.modelo = modelo;
+      this.potencia = potencia;
+      this.maxVelocidad = maxVelocidad;
+    }
+  
+    calcularTiempo(distancia: number): number {
+      const velocidadOptima = Math.min(this.maxVelocidad, this.potencia * 10);
+      const tiempo = distancia / velocidadOptima;
+      return tiempo;
+    }
+  }
+  
+ 
+  const autos: Auto[] = [
+    new Auto("Toyota", "Corolla", 120, 200),
+    new Auto("Ford", "Mustang", 300, 250),
+    new Auto("Honda", "Civic", 100, 180),
+    new Auto("Chevrolet", "Camaro", 250, 240),
+    new Auto("Volkswagen", "Golf", 110, 190)
+  ];
+  
+
+  autos.forEach(auto => {
+    console.log(`Marca: ${auto.marca}, Modelo: ${auto.modelo}, Potencia: ${auto.potencia}, Máxima Velocidad: ${auto.maxVelocidad}`);
+  });
+  
+
+  const distancia = 100; 
+  autos.forEach(auto => {
+    const tiempoOptimo = auto.calcularTiempo(distancia);
+    console.log(`Para el auto ${auto.marca} ${auto.modelo}, el tiempo óptimo para recorrer ${distancia} km es ${tiempoOptimo} horas.`);
+  });
+  
+  // Ejercicio 2 - TP 2
+
+  class Alumno {
+    nombre: string;
+  
+    constructor(nombre: string) {
+      this.nombre = nombre;
+    }
+  }
+  
+  class Curso {
+    nombre: string;
+    alumnos: Alumno[];
+  
+    constructor(nombre: string) {
+      this.nombre = nombre;
+      this.alumnos = [];
+    }
+  
+    asignarAlumno(alumno: Alumno): void {
+      this.alumnos.push(alumno);
+    }
+  }
+  
+  class Escuela {
+    cursos: Curso[];
+  
+    constructor() {
+      this.cursos = [];
+    }
+  
+    agregarCurso(curso: Curso): void {
+      this.cursos.push(curso);
+    }
+  }
+  
+  const escuela = new Escuela();
+  
+
+  const curso1 = new Curso("Matemáticas");
+  const curso2 = new Curso("Historia");
+  
+  const alumno1 = new Alumno("Juan");
+  const alumno2 = new Alumno("María");
+  
+  curso1.asignarAlumno(alumno1);
+  curso1.asignarAlumno
+  
+  // Ejercicio 3 - TP 2
+
+  class CuentaBancaria {
+    fondos: number;
+  
+    constructor() {
+      this.fondos = 0;
+    }
+  
+    asignarFondos(cantidad: number): void {
+      this.fondos += cantidad;
+      if (cantidad > 500000) {
+        this.dispararAlarma("Asignación de fondos superior a 500000");
+      }
+    }
+  
+    sacarFondos(cantidad: number): void {
+      if (cantidad > this.fondos) {
+        this.dispararAlarma("Intento de sacar más fondos de los disponibles");
+      } else if (cantidad > 100000) {
+        this.dispararAlarma("Intento de sacar más de 100000");
+      } else {
+        this.fondos -= cantidad;
+      }
+    }
+  
+    private dispararAlarma(mensaje: string): void {
+      console.log("¡Alarma! " + mensaje);
+    }
+  }
+  
+  // Crear una instancia de la CuentaBancaria
+  const cuenta = new CuentaBancaria();
+  
+  // Agregar fondos
+  cuenta.asignarFondos(200000);
+  cuenta.asignarFondos(600000);
+  
+  // Sacar fondos
+  cuenta.sacarFondos(150000);
+  cuenta.sacarFondos(700000);
+  cuenta.sacarFondos(90000);
+  
+
+  // Desafío - TP2 
+
+  interface FormaGeometrica {
+    calcularArea(): number;
+    calcularPerimetro(): number;
+  }
+  
+  class Rectangulo implements FormaGeometrica {
+    base: number;
+    altura: number;
+  
+    constructor(base: number, altura: number) {
+      this.base = base;
+      this.altura = altura;
+    }
+  
+    calcularArea(): number {
+      return this.base * this.altura;
+    }
+  
+    calcularPerimetro(): number {
+      return 2 * (this.base + this.altura);
+    }
+  }
+  
+  class Circulo implements FormaGeometrica {
+    radio: number;
+  
+    constructor(radio: number) {
+      this.radio = radio;
+    }
+  
+    calcularArea(): number {
+      return Math.PI * Math.pow(this.radio, 2);
+    }
+  
+    calcularPerimetro(): number {
+      return 2 * Math.PI * this.radio;
+    }
+  }
+  
+  // Crear una instancia de rectangulo
+  const rectangulo = new Rectangulo(5, 3);
+  console.log("Rectángulo");
+  console.log("Área:", rectangulo.calcularArea());
+  console.log("Perímetro:", rectangulo.calcularPerimetro());
+  
+  // Crear una instancia de circulo
+  const circulo = new Circulo(2);
+  console.log("Círculo");
+  console.log("Área:", circulo.calcularArea());
+  console.log("Perímetro:", circulo.calcularPerimetro());
+  
